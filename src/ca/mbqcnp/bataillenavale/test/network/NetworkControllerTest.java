@@ -7,8 +7,8 @@ import java.net.UnknownHostException;
 import java.util.concurrent.Semaphore;
 
 import android.test.AndroidTestCase;
-import ca.mbqcnp.bataillenavale.connection.NetworkControllerV2;
-import ca.mbqcnp.bataillenavale.connection.NetworkInterface;
+import ca.mbqcnp.bataillenavale.network.NetworkController;
+import ca.mbqcnp.bataillenavale.network.NetworkInterface;
 import ca.mbqcnp.bataillenavale.util.log.Log;
 
 public class NetworkControllerTest extends AndroidTestCase {
@@ -32,8 +32,8 @@ public class NetworkControllerTest extends AndroidTestCase {
 				Socket socket = serverSocket.accept();
 				Log.v("Client connected.");
 
-				NetworkControllerV2 networkControllerV2 = new NetworkControllerV2(this.pingClassTest, IPingClassTest.class, socket);
-				this.pingOpponent = (IPingClassTest) NetworkControllerV2.newInstance(networkControllerV2, IPingClassTest.class);
+				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class, socket);
+				this.pingOpponent = (IPingClassTest) NetworkController.newInstance(networkControllerV2, IPingClassTest.class);
 				this.closeConnexion.acquire();
 				Log.v("Close.");
 			} catch (IOException e) {
@@ -77,8 +77,8 @@ public class NetworkControllerTest extends AndroidTestCase {
 				Log.v("JoinnerClassTest", "Start connexion.");
 				Socket socket = new Socket("127.0.0.1", SERVERPORT);
 				Log.v("JoinnerClassTest", "connected.");
-				NetworkControllerV2 networkControllerV2 = new NetworkControllerV2(this.pingClassTest, IPingClassTest.class, socket);
-				this.pingOpponent = (IPingClassTest) NetworkControllerV2.newInstance(networkControllerV2, IPingClassTest.class);
+				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class, socket);
+				this.pingOpponent = (IPingClassTest) NetworkController.newInstance(networkControllerV2, IPingClassTest.class);
 				this.connexionOpen.release();
 
 				this.closeConnexion.acquire();

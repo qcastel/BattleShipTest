@@ -7,30 +7,30 @@ import java.util.List;
  */
 public class GameControllerBlackBoxMessage {
 
-	
+
 	protected String functionCall;
-	
-	protected List params;
-	
+
+	protected List<?> params;
+
 	public GameControllerBlackBoxMessage(String function){
 		this(function, null);
-		
+
 	}
-	
-	public GameControllerBlackBoxMessage(String function, List params){
+
+	public GameControllerBlackBoxMessage(String function, List<?> params) {
 		this.functionCall = function;
 		this.params = params;
 	}
 
 
-	public List getParams() {
-		return params;
-	}
-
 	public String getFunctionCall() {
-		return functionCall;
+		return this.functionCall;
+	}
+
+	public List<?> getParams() {
+		return this.params;
 	}
 
 
-	
+
 }
