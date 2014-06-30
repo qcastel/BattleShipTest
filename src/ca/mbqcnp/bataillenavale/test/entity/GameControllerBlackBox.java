@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ca.mbqcnp.bataillenavale.entity.AttackResult;
+import ca.mbqcnp.bataillenavale.entity.Player;
 import ca.mbqcnp.bataillenavale.test.tools.GameControllerBlackBoxMessage;
 
 public class GameControllerBlackBox extends GameControllerForTest {
@@ -23,7 +24,7 @@ public class GameControllerBlackBox extends GameControllerForTest {
 	}
 
 
-	public GameControllerBlackBox( boolean activeShootPosition,	boolean activeChangeTurn, boolean activeReady) {
+	public GameControllerBlackBox(boolean activeShootPosition,	boolean activeChangeTurn, boolean activeReady) {
 		super();
 
 		this.activeShootPosition = activeShootPosition;

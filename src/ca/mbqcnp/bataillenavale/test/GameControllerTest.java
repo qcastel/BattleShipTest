@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import android.test.AndroidTestCase;
+
 import ca.mbqcnp.bataillenavale.GameController;
 import ca.mbqcnp.bataillenavale.entity.AttackResult;
 import ca.mbqcnp.bataillenavale.entity.Direction;
@@ -23,7 +25,7 @@ import ca.mbqcnp.bataillenavale.test.entity.GameControllerBlackBox;
 import ca.mbqcnp.bataillenavale.test.entity.GameControllerForTest;
 import ca.mbqcnp.bataillenavale.test.tools.GameControllerBlackBoxMessage;
 
-public class GameControllerTest {
+public class GameControllerTest  extends AndroidTestCase {
 
 	@Before
 	public void setUp() throws Exception {
@@ -279,8 +281,11 @@ public class GameControllerTest {
 		gameController.setDeployementIHMInterface(new DeployementComputer());
 		gameControllerBlackBox.setOpponentGameController(gameController);
 		gameControllerBlackBox.setDeployementIHMInterface(new DeployementComputer());
-		gameController.setMyPlayer(new Player("Test", 1, false, 1));
-		gameControllerBlackBox.setMyPlayer(new Player("BlackBox",2,true,2));
+		gameController.setMyPlayer(new Player("Test", 1, 1));
+		gameController.setMyTurn(true);
+		gameControllerBlackBox.setMyPlayer(new Player("BlackBox",2,2));
+		gameControllerBlackBox.setMyTurn(false);
+
 		gameController.setOpponentPlayer(gameControllerBlackBox.getMyPlayer());
 		gameControllerBlackBox.setOpponentPlayer(gameController.getMyPlayer());
 		
@@ -356,7 +361,7 @@ public class GameControllerTest {
 		GameControllerBlackBox gameControllerBlackBox = new GameControllerBlackBox(false, false, true);
 
 
-		gameController.opponentJoinMyGame(gameControllerBlackBox);
+		gameController.setOpponentGameController(gameControllerBlackBox);
 		Ship ship1 = gameController.setShip(new ShipPosition(1, 1, Direction.HORIZONTAL), 5);
 		Ship ship2 = gameController.setShip(new ShipPosition(5, 1, Direction.VERTICAL), 3);
 		Ship ship3 = gameController.setShip(new ShipPosition(5, 4, Direction.VERTICAL), 3);
@@ -404,7 +409,7 @@ public class GameControllerTest {
 
 
 
-		gameController.opponentJoinMyGame(gameControllerBlackBox);
+		gameController.setOpponentGameController(gameControllerBlackBox);
 		Ship ship1 = gameController.setShip(new ShipPosition(1, 1, Direction.HORIZONTAL), 5);
 		Ship ship2 = gameController.setShip(new ShipPosition(5, 1, Direction.VERTICAL), 3);
 		Ship ship3 = gameController.setShip(new ShipPosition(5, 4, Direction.VERTICAL), 3);

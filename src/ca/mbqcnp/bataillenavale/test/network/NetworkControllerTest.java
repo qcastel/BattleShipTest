@@ -32,7 +32,7 @@ public class NetworkControllerTest extends AndroidTestCase {
 				Socket socket = serverSocket.accept();
 				Log.v("Client connected.");
 
-				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class, socket);
+				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class,  socket.getInputStream(), socket.getOutputStream());
 				this.pingOpponent = (IPingClassTest) NetworkController.newInstance(networkControllerV2, IPingClassTest.class);
 				this.closeConnexion.acquire();
 				Log.v("Close.");
@@ -77,7 +77,7 @@ public class NetworkControllerTest extends AndroidTestCase {
 				Log.v("JoinnerClassTest", "Start connexion.");
 				Socket socket = new Socket("127.0.0.1", SERVERPORT);
 				Log.v("JoinnerClassTest", "connected.");
-				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class, socket);
+				NetworkController networkControllerV2 = new NetworkController(this.pingClassTest, IPingClassTest.class, socket.getInputStream(), socket.getOutputStream());
 				this.pingOpponent = (IPingClassTest) NetworkController.newInstance(networkControllerV2, IPingClassTest.class);
 				this.connexionOpen.release();
 

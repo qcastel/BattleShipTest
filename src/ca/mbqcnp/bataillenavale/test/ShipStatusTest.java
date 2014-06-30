@@ -6,10 +6,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import android.test.AndroidTestCase;
+
 import ca.mbqcnp.bataillenavale.entity.ShipStatus;
 import ca.mbqcnp.bataillenavale.entity.Square;
 
-public class ShipStatusTest {
+public class ShipStatusTest  extends AndroidTestCase {
 
 	@Before
 	public void setUp() throws Exception {
