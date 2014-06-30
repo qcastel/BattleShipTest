@@ -1,9 +1,5 @@
 package ca.mbqcnp.bataillenavale.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import android.test.AndroidTestCase;
-
 import ca.mbqcnp.bataillenavale.GameController;
 import ca.mbqcnp.bataillenavale.entity.AttackResult;
 import ca.mbqcnp.bataillenavale.entity.Direction;
@@ -21,6 +16,7 @@ import ca.mbqcnp.bataillenavale.entity.Ship;
 import ca.mbqcnp.bataillenavale.entity.ShipPosition;
 import ca.mbqcnp.bataillenavale.entity.Square;
 import ca.mbqcnp.bataillenavale.ia.DeployementComputer;
+import ca.mbqcnp.bataillenavale.test.entity.DeploymentFake;
 import ca.mbqcnp.bataillenavale.test.entity.GameControllerBlackBox;
 import ca.mbqcnp.bataillenavale.test.entity.GameControllerForTest;
 import ca.mbqcnp.bataillenavale.test.tools.GameControllerBlackBoxMessage;
@@ -357,9 +353,16 @@ public class GameControllerTest  extends AndroidTestCase {
 	@Test
 	public void testReady() {
 	// Initialize context
+		DeploymentFake deploymentFake = new DeploymentFake();
+
 		GameControllerForTest gameController = new GameControllerForTest();		
 		GameControllerBlackBox gameControllerBlackBox = new GameControllerBlackBox(false, false, true);
+		gameController.setDeployementIHMInterface(deploymentFake);
+		gameControllerBlackBox.setDeployementIHMInterface(deploymentFake);
 
+
+		gameController.setOpponentGameController(gameControllerBlackBox);
+		gameControllerBlackBox.setOpponentGameController(gameController);
 
 		gameController.setOpponentGameController(gameControllerBlackBox);
 		Ship ship1 = gameController.setShip(new ShipPosition(1, 1, Direction.HORIZONTAL), 5);
@@ -404,12 +407,15 @@ public class GameControllerTest  extends AndroidTestCase {
 
 	@Test
 	public void testChangeTurn() {
+		DeploymentFake deploymentFake = new DeploymentFake();
 		GameControllerForTest gameController = new GameControllerForTest();		
 		GameControllerBlackBox gameControllerBlackBox = new GameControllerBlackBox(false, true, false);
-
+		gameController.setDeployementIHMInterface(deploymentFake);
+		gameControllerBlackBox.setDeployementIHMInterface(deploymentFake);
 
 
 		gameController.setOpponentGameController(gameControllerBlackBox);
+		gameControllerBlackBox.setOpponentGameController(gameController);
 		Ship ship1 = gameController.setShip(new ShipPosition(1, 1, Direction.HORIZONTAL), 5);
 		Ship ship2 = gameController.setShip(new ShipPosition(5, 1, Direction.VERTICAL), 3);
 		Ship ship3 = gameController.setShip(new ShipPosition(5, 4, Direction.VERTICAL), 3);
